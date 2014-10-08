@@ -3,8 +3,41 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      js:  {
+        src: [
+          'public/client/**/*.js'
+        ],
+        dest: 'public/dist/main.js'
+      }
     },
+    injector: {
+      options:{
 
+      },
+      prod: {
+        files: {
+          'views/index.ejs': [
+            'public/dist/main.min.js'
+          ],
+          'views/layout.ejs': [
+            'public/dist/style.min.css'
+          ]
+        }
+      },
+      dev: {
+
+        files: {
+          'views/index.ejs': [
+            'public/client/**/*.js'
+          ],
+          'views/layout.ejs': [
+            'public/style.css'
+          ]
+
+        }
+
+      }
+    },
     mochaTest: {
       test: {
         options: {
@@ -21,11 +54,17 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      prod:  {
+        src: [
+          'public/dist/main.js'
+        ],
+        dest: 'public/dist/main.min.js'
+      }
     },
 
     jshint: {
       files: [
-        // Add filespec list here
+        'public/client/**/*.js'
       ],
       options: {
         force: 'true',
@@ -38,6 +77,12 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      prod:  {
+        src: [
+          'public/style.css'
+        ],
+        dest: 'public/dist/style.min.css'
+      }
     },
 
     watch: {
@@ -71,6 +116,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-injector');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console

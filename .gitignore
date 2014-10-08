@@ -25,6 +25,8 @@ lib-cov
 pids
 logs
 results
-
+azure.err
+iisnode.yml
 npm-debug.log
 node_modules
+public/dist
