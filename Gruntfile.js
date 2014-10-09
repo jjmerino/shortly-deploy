@@ -104,6 +104,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: 'git push azure'
       }
     },
   });
@@ -140,6 +141,12 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'jshint',
+    'concat',
+    'uglify',
+    'cssmin',
+    'injector:prod',
+    'mochaTest',
   ]);
 
   grunt.registerTask('upload', function(n) {
@@ -151,7 +158,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
+    'build'
   ]);
 
 
