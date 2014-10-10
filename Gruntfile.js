@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     },
     injector: {
       options:{
-
+        ignorePath: 'public/'
       },
       prod: {
         files: {

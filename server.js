@@ -1,5 +1,5 @@
 var app = require('./server-config.js');
-
+// var config = require('./app/config.js');
 var port = process.env.PORT || 4568;
 
 app.listen(port);
